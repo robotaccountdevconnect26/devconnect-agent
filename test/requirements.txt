@@ -1,1 +1,3 @@
+# Core Agent Logic
+google-adk>=1.14.0
 google-cloud-aiplatform[agent_engines]
