@@ -1,14 +1,16 @@
-from google.adk.agents.llm_agent import Agent
+cat <<EOF > test/my_agent.py
+class MyAgent:
 
-# Mock tool implementation
-def get_current_time(city: str) -> dict:
-    """Returns the current time in a specified city."""
-    return {"status": "success", "city": city, "time": "10:30 AM"}
+  def query_none(self):
+    return None
 
-root_agent = Agent(
-    model='gemini-flash-latest',
-    name='root_agent',
-    description="Tells the current time in a specified city.",
-    instruction="You are a helpful assistant that tells the current time in cities. Use the 'get_current_time' tool for this purpose.",
-    tools=[get_current_time],
-)
+  def query_list(self):
+    return [1, 2, 3]
+
+  def register_operations(self):
+    return {
+        "": ["query_none", "query_list"],
+    }
+
+agent = MyAgent()
+EOF
